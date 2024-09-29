@@ -35,53 +35,58 @@ const formDataSchema = z.object({
   age: z.number(),
 });
 
-export const router = createBrowserRouter([
-  {
-    path: paths.home,
-    element: <Login />,
-    index: true,
-  },
+export const router = createBrowserRouter(
+  [
+    {
+      path: paths.home,
+      element: <Login />,
+      index: true,
+    },
 
-  {
-    path: paths.dashboard,
-    element: <DashboardLayout />,
-    children: [
-      {
-        index: true,
-        element: <App />,
-      },
-      {
-        path: paths.highLight,
-        element: <HighlightExample />,
-      },
-    ],
-    ErrorBoundary,
-    action: async ({ request }) => {
-      try {
-        const formData = await request.formData();
-        const parsedData = formDataSchema.parse({
-          name: formData.get("name") ? formData.get("name") : undefined,
-          age: formData.get("age") ? Number(formData.get("age")) : undefined,
-        });
+    {
+      path: paths.dashboard,
+      element: <DashboardLayout />,
+      children: [
+        {
+          index: true,
+          element: <App />,
+        },
+        {
+          path: paths.highLight,
+          element: <HighlightExample />,
+        },
+      ],
+      ErrorBoundary,
+      action: async ({ request }) => {
+        try {
+          const formData = await request.formData();
+          const parsedData = formDataSchema.parse({
+            name: formData.get("name") ? formData.get("name") : undefined,
+            age: formData.get("age") ? Number(formData.get("age")) : undefined,
+          });
 
+          return {
+            name: parsedData.name,
+            age: parsedData.age,
+          };
+        } catch (err) {
+          console.log({ err });
+
+          throw new Response("Something went wrong", {
+            status: 400,
+            statusText: "Bad Request",
+          });
+        }
+      },
+      loader: () => {
         return {
-          name: parsedData.name,
-          age: parsedData.age,
+          name: "John Doe",
+          age: 30,
         };
-      } catch (err) {
-        console.log({ err });
-
-        throw new Response("Something went wrong", {
-          status: 400,
-          statusText: "Bad Request",
-        });
-      }
+      },
     },
-    loader: () => {
-      return {
-        name: "John Doe",
-        age: 30,
-      };
-    },
-  },
-]);
+  ],
+  {
+    basename: "/",
+  }
+);
