@@ -6,6 +6,7 @@ import { isRouteErrorResponse } from "react-router-dom";
 import { paths } from "@/common/paths";
 import { DashboardLayout } from "@/pages/dashboard-layout";
 import { Login } from "@/pages/login";
+import HighlightExample from "@/pages/high-light";
 
 function ErrorBoundary() {
   const error = useRouteError();
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <App />,
+      },
+      {
+        path: paths.highLight,
+        element: <HighlightExample />,
       },
     ],
     ErrorBoundary,

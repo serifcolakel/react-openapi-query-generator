@@ -7,7 +7,6 @@ export const description =
 
 export function DashboardLayout() {
   const outlet = useOutlet();
-  console.log({ outlet });
   return (
     <div className="grid w-full pl-[53px]">
       <SideBar />

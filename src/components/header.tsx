@@ -22,7 +22,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ThemeToggle } from "./theme-toggle";
 export default function Header() {
   return (
-    <header className="sticky top-0 z-10 flex min-h-[53px] items-center gap-1 border-b bg-background px-4 shadow-md">
+    <header className="sticky top-0 flex min-h-[53px] z-50 items-center gap-1 border-b bg-background px-4 shadow-md">
       <h1 className="text-xl font-semibold">Application</h1>
       <Drawer>
         <DrawerTrigger asChild>

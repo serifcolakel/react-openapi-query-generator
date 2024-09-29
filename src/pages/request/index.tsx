@@ -8,15 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Editor, { OnChange, OnMount } from "@monaco-editor/react";
 import { toast } from "sonner";
-
-/**
- * @description: Test handler type
- */
-export type ArgumentTypes<F extends Function> = F extends (
-  ...args: infer A
-) => unknown
-  ? A
-  : never;
+import { ArgumentTypes } from "@/types";
 
 export default function TestPage() {
   const [editorValues, setEditorValues] = useState<Record<string, string>>({});
@@ -28,6 +20,9 @@ export default function TestPage() {
   const editorRef = useRef<ArgumentTypes<OnMount>[0]>();
 
   useEffect(() => {
+    setEditorValues({
+      test: 'Requester.test("Test", () => {\n    Requester.expect(1).to.be.above(0);\n    Requester.expect(1).to.be.below(2);\n    Requester.expect(1).to.be.equal(1);\n    Requester.expect(1).not.to.be.equal(2);\n    Requester.response.to.have.status(200);\n})',
+    });
     return () => {
       editorRef.current?.setModel(null);
       editorRef.current?.dispose();
@@ -38,9 +33,12 @@ export default function TestPage() {
   const handleEditorChange: OnChange = (value) => {
     setEditorValues({
       ...editorValues,
+      // "\n\n\n\n\n\n\n\n\n\n\nconst response = Requester.response;"
       test: value || "",
     });
   };
+
+  console.log("editorValues", editorValues);
 
   const fetchUrl = async () => {
     setLoading(true);
@@ -138,7 +136,7 @@ export default function TestPage() {
   };
 
   return (
-    <div className="h-screen space-y-4">
+    <div className="h-full space-y-4">
       <div className="flex flex-row gap-x-4">
         <Input
           className="w-full"
@@ -155,6 +153,7 @@ export default function TestPage() {
         <Editor
           className="h-full overflow-hidden border rounded-lg shadow-sm"
           defaultLanguage="javascript"
+          height={"50vh"}
           defaultValue={JSON.stringify(response, null, 2)}
           onChange={handleEditorChange}
           onMount={handleOnMount}

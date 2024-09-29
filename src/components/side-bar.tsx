@@ -1,12 +1,9 @@
 import {
-  Book,
   Bot,
-  Code2,
   Dot,
+  HighlighterIcon,
   LayoutDashboard,
   LifeBuoy,
-  Settings2,
-  SquareTerminal,
   SquareUser,
   Triangle,
 } from "lucide-react";
@@ -30,16 +27,11 @@ const links = [
     description: "Manage your projects and models",
   },
   { icon: <Bot className="size-5" />, label: "Models", path: paths.home },
-  { icon: <Code2 className="size-5" />, label: "API", path: paths.home },
   {
-    icon: <Book className="size-5" />,
-    label: "Documentation",
-    path: paths.home,
-  },
-  {
-    icon: <Settings2 className="size-5" />,
-    label: "Settings",
-    path: paths.home,
+    icon: <HighlighterIcon className="size-5" />,
+    label: "Highlight",
+    path: paths.highLight,
+    description: "Annotate and highlight text",
   },
 ];
 
@@ -74,9 +66,11 @@ export default function SideBar() {
               className="flex flex-col"
               sideOffset={5}
             >
-              <Label className="text-center">{label}</Label>
+              <Label className="text-center text-white dark:text-gray-500">
+                {label}
+              </Label>
               {description && (
-                <Label className="flex flex-row items-center text-xs">
+                <Label className="flex flex-row items-center text-xs text-white dark:text-gray-500">
                   <Dot />
                   {description}
                 </Label>
@@ -84,81 +78,6 @@ export default function SideBar() {
             </TooltipContent>
           </Tooltip>
         ))}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-lg bg-muted"
-              aria-label="Playground"
-            >
-              <SquareTerminal className="size-5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="right" sideOffset={5}>
-            Playground
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-lg"
-              aria-label="Models"
-            >
-              <Bot className="size-5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="right" sideOffset={5}>
-            Models
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-lg"
-              aria-label="API"
-            >
-              <Code2 className="size-5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="right" sideOffset={5}>
-            API
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-lg"
-              aria-label="Documentation"
-            >
-              <Book className="size-5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="right" sideOffset={5}>
-            Documentation
-          </TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-lg"
-              aria-label="Settings"
-            >
-              <Settings2 className="size-5" />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="right" sideOffset={5}>
-            Settings
-          </TooltipContent>
-        </Tooltip>
       </nav>
       <nav className="grid gap-1 p-2 mt-auto">
         <Tooltip>

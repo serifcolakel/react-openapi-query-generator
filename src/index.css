@@ -64,3 +64,30 @@
     @apply bg-background text-foreground;
   }
 }
+
+.input-container {
+  @apply h-10 relative;
+}
+
+.input-container input {
+  @apply w-full h-full absolute inset-0 bg-transparent outline-none text-base z-10 px-2 rounded border-input;
+  @apply focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:ring-offset-slate-900 focus:border-primary;
+}
+
+.input-container input::placeholder {
+  @apply text-transparent;
+}
+
+/* For showing through placeholder */
+.input-container input:not([value=""]) {
+  -webkit-text-fill-color: transparent;
+}
+
+.input-container .input-renderer {
+  @apply absolute inset-0 mx-2 text-base text-foreground flex items-center whitespace-nowrap overflow-x-auto select-none;
+  scrollbar-width: none;
+}
+
+.input-container .input-renderer::-webkit-scrollbar {
+  display: none;
+}
