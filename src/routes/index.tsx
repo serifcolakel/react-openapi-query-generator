@@ -7,6 +7,7 @@ import { paths } from "@/common/paths";
 import { DashboardLayout } from "@/pages/dashboard-layout";
 import { Login } from "@/pages/login";
 import HighlightExample from "@/pages/high-light";
+import AIChatBot from "@/pages/ai-chat-bot";
 
 function ErrorBoundary() {
   const error = useRouteError();
@@ -54,6 +55,10 @@ export const router = createBrowserRouter(
         {
           path: paths.highLight,
           element: <HighlightExample />,
+        },
+        {
+          path: paths.ai,
+          element: <AIChatBot />,
         },
       ],
       ErrorBoundary,

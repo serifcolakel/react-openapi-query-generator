@@ -26,7 +26,7 @@ const links = [
     path: paths.dashboard,
     description: "Manage your projects and models",
   },
-  { icon: <Bot className="size-5" />, label: "Models", path: paths.home },
+  { icon: <Bot className="size-5" />, label: "AI Chat Bot", path: paths.ai },
   {
     icon: <HighlighterIcon className="size-5" />,
     label: "Highlight",
